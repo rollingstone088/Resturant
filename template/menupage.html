@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <style>
+        body{
+    font-family: "Sofia", sans-serif;
+    text-shadow: 3px 3px 3px #ababab; 
+    background: linear-gradient(#ffffff,#fafafa);
+    }
+
+body::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#FC5C7D,#6A82FB); 
+    clip-path: circle(30% at right 50%);
+}
+
+body::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#56ab2f,#a8e063);
+    clip-path: circle(20% at 10% 10%);
+}
+
+.navbar{
+    z-index: 50;
+    box-shadow: blanchedalmond;
+}
+
+.container{
+    position: relative;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.container .accordion-item{
+    position: relative;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.container .accordion .accordion-item .accordion-header button{
+    font-weight: bold;
+    color: white;
+} 
+
+.container .accordion .accordion-item .accordion-collapse collapse .accordion-body .row row-cols-1 row-cols-md-4 g-3 .col .card h-100
+    {  
+    position: relative;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 2;
+}
+
+.card-body {
+    font-weight: bold;
+    color: black;
+    opacity: 1.0;
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.loader-container img {
+    height: 250px;
+    width: 250px;
+}
+
+.loader-container.fade-out {
+    top: 110%;
+    opacity: 0;
+}
+
+.popstar {
+    background: #eeee;
+}
+
+.card h-100 mb-3{
+    box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.bg-dark{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+    </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'menupage.css' %}">
+    <title>Menu Page</title>
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ <div class="loader-container">
+        <img src="{%static 'loader1.gif'%}" alt="">
+    </div>
+    <script>
+        function loader() {
+            document.querySelector('.loader-container').classList.add('fade-out');
+        }
+
+        function fadeout() {
+            setInterval(loader, 3500);
+        }
+        window.onload = fadeout;
+    </script> 
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <a class="navbar-brand" href="#">Restaurant</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">About</a>
+                    </li>
+                </ul>
+                <form class="d-flex"></form>
+                <button type="button" class="btn btn-secondary" id="popcart" data-bs-toggle="popover">
+                    Cart (<span id="cart">0</span>)
+                  </button>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="accordion" id="accordionExample">
+        {% for c in cu%}
+        <div class="accordion-item">
+            <h1 class="accordion-header" id="heading{{c.num}}">
+                <button class="btn bg-transparent accordion-button collapsed text-dark" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse{{c.num}}" aria-expanded="true"
+                        aria-controls="collapse{{c.num}}">
+                    <h2>{{c.type}}</h2>
+                </button>
+            </h1>
+            <div id="collapse{{c.num}}" class="accordion-collapse collapse " aria-labelledby="heading{{c.num}}"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="row row-cols-1 row-cols-md-4 g-3">
+                        {% for m in me %} {% if m.typeid == c %}
+                        {% if m.menu_size == "v" %}
+                        <div class="col">
+                            <div class="card h-100 bg-transparent border-success mb-3">
+                                <img src="{{m.upload}}" class="w-100 p-3 h-100 d-inline-block rounded card-img-top">
+                                <div class="card-body">
+                                     <h5 class="card-title" id="namepr{{m.id}}">{{m.name}}</h5>
+                                        <p class="card-text" id="costpr{{m.id}}">Rs. {{m.price}}/-</p>
+                                        <span id="divpr{{m.id}}" class="divpr">
+                                            <button id="pr{{m.id}}" type="button" class="btn bg-transparent btn-outline-primary cart">Add to Cart</button>
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% elif m.menu_size == "n" %}
+                        <div class="col">
+                            <div class="card h-100 bg-transparent border-danger mb-3">
+                                <img src="{{m.upload}}" class="w-100 p-3 h-100 d-inline-block rounded card-img-top">
+                                <div class="card-body">
+                                      <h5 class="card-title" id="namepr{{m.id}}">{{m.name}}</h5>
+                                        <p class="card-text" id="costpr{{m.id}}">Rs. {{m.price}}/-</p>
+                                        <span id="divpr{{m.id}}" class="divpr">
+                                            <button id="pr{{m.id}}" type="button" class="btn btn-primary cart">Add to Cart</button>
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% elif m.menu_size == "s" %}
+                        <div class="col">
+                            <div class="card h-100 bg-transparent border-info mb-3">
+                                <img src="{{m.upload}}" class="w-100 p-3 h-100 d-inline-block rounded card-img-top">
+                                <div class="card-body">
+                                      <h5 class="card-title" id="namepr{{m.id}}">{{m.name}}</h5>
+                                        <p class="card-text" id="costpr{{m.id}}">Rs. {{m.price}}/-</p>
+                                        <span id="divpr{{m.id}}" class="divpr">
+                                        <button id="pr{{m.id}}" type="button" class="btn btn-outline-primary cart">Add to Cart</button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% elif m.menu_size == "D" %}
+                        <div class="col">
+                            <div class="card h-100 bg-transparent border-primary mb-3">
+                                <img src="{{m.upload}}" class="w-100 p-3 h-100 d-inline-block rounded card-img-top">
+                                <div class="card-body">
+                                       <h5 class="card-title" id="namepr{{m.id}}">{{m.name}}</h5>
+                                        <p class="card-text" id="costpr{{m.id}}">Rs. {{m.price}}/-</p>
+                                        <span id="divpr{{m.id}}" class="divpr">
+                                        <button id="pr{{m.id}}" type="button" class="btn btn-primary cart">Add to Cart</button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endif %} {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% block js %}
+    <script>
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        updatecart(cart);
+        $('.cart').click(function() {
+            var idstr = this.id.toString();
+            if (cart[idstr] != undefined) {
+                cart[idstr] = cart[idstr] + 1;
+            } else {
+                cart[idstr] = 0;
+            }
+            updatecart(cart);
+        });
+        // var exampleEl = document.getElementById('popcart');
+        // var popover = new bootstrap.Popover(exampleEl);
+
+        // $('#popcart').popover();
+        // var popover = new bootstrap.Popover(document.querySelector('#popcart'), {
+        //     container: 'body'
+        // })
+
+
+        var popstr = "";
+
+        // $(".btn-secondary").click(function() {
+        //     $("#popcart").popover();
+        // });
+
+        updatepop(cart);
+
+        function updatepop(cart) {
+            popstr = "<div id='popstar' class='popstar mx-2 my-2'>";
+            var i = 1;
+            for (var item in cart) {
+                popstr = popstr + "<b>" + i + "</b>. ";
+                popstr = popstr + document.getElementById('name' + item).innerHTML.slice(0, 8) + "price: " + document.getElementById('cost' + item).innerHTML + "  Qty: " + cart[item] + "<br>";
+                i = i + 1;
+            }
+            popstr = popstr + "</div>"
+            //document.getElementById('popcart').setAttribute('data-bs-content', popstr);
+            $(".btn-secondary").click(function(e) {
+
+                e.preventDefault();
+                e.stopPropagation();
+                $('#popcart').popover({
+                    html: true,
+                    title: 'Your Cart : ',
+                    content: popstr,
+                    placement: 'bottom',
+                    template: '<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+                }).popover('show');
+            });
+            // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+            // var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+            //     return new bootstrap.Popover(popoverTriggerEl);
+
+            // })
+        }
+
+        function updatecart(cart) {
+            for (var item in cart) {
+                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class= 'btn btn-primary minus'>-</button> <span id ='val" + item + "'>" + cart[item] + "</span><button id='plus" + item + "' class= 'btn btn-primary plus '>+</button>";
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+            updatepop(cart);
+
+        }
+
+        $('.divpr').on('click', 'button.minus', function() {
+            var a = this.id.slice(5, );
+            cart[a] = cart[a] - 1;
+            cart[a] = Math.max(0, cart[a]);
+            console.log(a);
+
+            updatecart(cart);
+            updatepop(cart);
+        });
+        $('.divpr').on('click', 'button.plus', function() {
+            var a = this.id.slice(4, );
+            cart[a] = cart[a] + 1;
+            cart[a] = Math.min(10, cart[a]);
+            console.log(a);
+            updatecart(cart);
+            updatepop(cart);
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>
